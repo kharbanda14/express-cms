@@ -19,6 +19,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+require('./essetials')(app);
+require('./middlewares')(app);
+require('./static_files')(app,express);
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
