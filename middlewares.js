@@ -1,13 +1,17 @@
 var session = require('express-session');
 var csurf = require('csurf');
-module.exports = function (app) {
+var store = require('connect-mongo')(session);
+module.exports = function (app,connection) {
     /** 
      * Express-session middleware
      */
     app.use(session({
         secret: 'secretkey',
         resave: false,
-        saveUninitialized: false
+        saveUninitialized: false,
+        store:new store({
+            mongooseConnection:connection
+        })
     }));
     /**
      * CSRF middleware

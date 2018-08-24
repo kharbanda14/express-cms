@@ -3,12 +3,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var mongoose = require('mongoose');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
-
+var authRouter = require('./routes/auth');
+const db = require('./config/db');
 var app = express();
+
+mongoose.connect(db.mongodb.url);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,12 +23,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-require('./middlewares')(app);
+require('./middlewares')(app,mongoose.connection);
 require('./essetials')(app);
 require('./static_files')(app,express);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/auth', authRouter);
 app.use(require('./config/admin').path, adminRouter);
 
 // catch 404 and forward to error handler

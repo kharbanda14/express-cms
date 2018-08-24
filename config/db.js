@@ -1,3 +1,3 @@
 module.exports.mongodb = {
-    url:'',
+    url:'mongodb://localhost:27017/nodecms',
 }
