@@ -1,6 +1,7 @@
 var session = require('express-session');
 var csurf = require('csurf');
 var store = require('connect-mongo')(session);
+var flash = require('connect-flash');
 module.exports = function (app,connection) {
     /** 
      * Express-session middleware
@@ -17,6 +18,9 @@ module.exports = function (app,connection) {
      * CSRF middleware
      */
     app.use(csurf());
+
+    app.use(flash());
+
     
     return app;
 }

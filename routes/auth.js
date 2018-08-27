@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var users_model = require('../models/users_model');
 var User = require('../collections/Users');
+var adminconfig = require('../config/admin');
 /* GET home page. */
 router.post('/login', async function (req, res, next) {
     console.log(req.session.user);
@@ -14,12 +15,10 @@ router.post('/login', async function (req, res, next) {
     try {
         var doc = await users_model.authenticateAdmin(username, password);
         req.session.admin = doc;
-        res.send(doc);
+        res.redirect(`${adminconfig.path}`);
     } catch (error) {
-        res.send({
-            status: 'err',
-            message: error
-        }).status(401);
+        req.flash('error_msg',error);
+        res.redirect('/auth/login');
     }
 });
 
@@ -39,7 +38,7 @@ router.get('/login', function (req, res, next) {
     }
     res.render('admin/login', {
         title: 'Express',
-        page: 'index.ejs'
+        error_msg:req.flash('error_msg')
     });
 });
 

@@ -20,7 +20,7 @@ module.exports.authenticateAdmin = function (username, password) {
                 reject('Username or password is incorrect');
             }
         } catch (error) {
-            reject(error);
+            reject('Error Occured, Try Again');
         }
     });
 

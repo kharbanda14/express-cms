@@ -6,6 +6,8 @@ module.exports = function (app) {
         res.locals.base_url = config.base_url;
         res.locals.meta = config.meta;
         res.locals.views = path.join(__dirname, 'views/');
+        res.locals.admin_views = path.join(__dirname, 'views/admin/');
+        res.locals.admin_partials = path.join(__dirname, 'views/admin/partials/');
         res.locals._csrf = req.csrfToken();
         res.locals._csrfInput = `<input type="hidden" name="_csrf" value="${req.csrfToken()}">`;
         res.locals.current_url = req.originalUrl;

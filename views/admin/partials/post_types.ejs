@@ -1,0 +1,21 @@
+<li class="nav-title">CMS</li>
+<% if (post_types && post_types.length > 0) {
+    post_types.forEach((type) => { %>
+    <li class="nav-item <%= type.sub_menu.length > 0 ? 'nav-dropdown' : '' %>">
+        <a class="nav-link <%= type.sub_menu.length > 0 ? 'nav-dropdown-toggle' : '' %>" href="#">
+            <i class="<%= type.icon %>"></i>
+            <%= type.nice_name %>
+        </a>
+        <% if (type.sub_menu.length > 0) { %>
+            <% type.sub_menu.forEach((sub_item) => { %>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<%= admin_baseurl + '/cms/' + type.slug + '/' + sub_item.action %>">
+                            <i class="<%= sub_item.icon %>"></i> <%= sub_item.title %></a>
+                    </li>
+                </ul>
+            <% }); %>
+        <% }; %>
+    </li>
+    <% }); %>
+<% }; %>

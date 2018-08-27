@@ -23,6 +23,11 @@
                         <div class="card-body">
                             <h1>Login</h1>
                             <p class="text-muted">Sign In to your account</p>
+                            <% if (locals.error_msg.length > 0) { %>
+                                <div class="alert alert-danger">
+                                    <%= locals.error_msg %>
+                                </div>
+                            <% } %>
                             <form action="<%= base_url %>auth/login" method="POST">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
