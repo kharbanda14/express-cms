@@ -20,7 +20,7 @@
 <div class="jumbotron custom_header">
     <div class="container">
         <h1 class="display-3">
-            <%= title || meta.title %>
+            <%= locals.title || meta.title || post.title %>
         </h1>
     </div>
 </div>

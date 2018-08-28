@@ -17,7 +17,7 @@
                            <td><%= post.title %></td>
                            <td>
                                <div class="btn-group">
-                                   <a href="" class="btn btn-success"> <i class="fa fa-eye"></i> View</a>
+                                   <a href="/<%= post.slug %>" class="btn btn-success"> <i class="fa fa-eye"></i> View</a>
                                    <a href="<%= admin_baseurl+'/cms/'+post_type.type+'/edit/'+post._id %>" class="btn btn-primary"> <i class="fa fa-pencil"></i> Edit</a>
                                    <a href="" class="btn btn-danger"> <i class="fa fa-trash"></i> Delete</a>
                                </div>

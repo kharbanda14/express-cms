@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 require('./middlewares')(app,mongoose.connection);
-require('./essetials')(app);
+require('./essentials')(app);
 require('./static_files')(app,express);
 
 app.use('/', indexRouter);

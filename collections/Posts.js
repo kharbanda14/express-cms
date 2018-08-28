@@ -14,6 +14,11 @@ var structure = {
         trim:true,
         required:true
     },
+    slug:{
+        type:String,
+        trim:true,
+        required:true,
+    },
     user_id:{
         type:mongoose.Schema.Types.ObjectId,
         required:true,
@@ -40,9 +45,15 @@ var structure = {
     created_at: {
         type: Number,
         default: Date.now()
+    },
+    last_edited : {
+        type:Number,
+        default:Date.now()
     }
 }
 
 var schema = new mongoose.Schema(structure);
+
+
 
 module.exports = mongoose.model(collection_name, schema, collection_name);

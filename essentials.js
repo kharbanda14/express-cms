@@ -11,7 +11,8 @@ module.exports = function (app) {
         res.locals._csrf = req.csrfToken();
         res.locals._csrfInput = `<input type="hidden" name="_csrf" value="${req.csrfToken()}">`;
         res.locals.current_url = req.originalUrl;
-        res.locals.admin_baseurl = admin_config.base_url
+        res.locals.admin_baseurl = admin_config.base_url;
+        res.locals.moment = require('moment');
         next();
     })
 }

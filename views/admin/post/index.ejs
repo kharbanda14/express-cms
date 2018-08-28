@@ -22,6 +22,11 @@
                         <%= success_msg %>
                     </div>
                 <% } %>
+                <% if (form_err_msg.length > 0) { %>
+                    <div class="alert alert-danger">
+                        <%= form_err_msg %>
+                    </div>
+                <% } %>
                 <form method="POST">
                     <div class="form-group">
                         <label for="title">Title :</label>
@@ -49,7 +54,36 @@
                 Details
             </div>
             <div class="card-body">
-                details
+                <div class="row">
+                    <table class="table table-striped">
+                        <% if (existing_data.created_at) { %>
+                            <tr>
+                                <td><strong>Published :</strong></td>
+                                <td>
+                                    <%= moment(existing_data.created_at).format('MMMM Do YYYY, h:mm a'); %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Last Edited :</strong></td>
+                                <td>
+                                    <%= moment(existing_data.last_edited).format('MMMM Do YYYY, h:mm a'); %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>User :</strong></td>
+                                <td>
+                                    <%= existing_data.user_id.username %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Post Status :</strong></td>
+                                <td>
+                                    <span class="badge badge-<%= existing_data.post_status == 'published' ? 'success' :'danger'  %>"><%= existing_data.post_status == 'published' ? 'Published' :''  %></span>
+                                </td>
+                            </tr>
+                            <% } %>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
