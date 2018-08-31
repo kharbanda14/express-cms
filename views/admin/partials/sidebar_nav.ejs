@@ -6,11 +6,15 @@
                 <span class="badge badge-primary">NEW</span>
             </a>
         </li>
-        
+
         <%- include(admin_partials+'post_types') %>
-        
-        <li class="divider"></li>
-        
+
+            <li class="divider"></li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<%= admin_baseurl + '/gallery' %>">
+                    <i class="nav-icon icon-picture"></i> Gallery</a>
+            </li>
 
     </ul>
 </nav>

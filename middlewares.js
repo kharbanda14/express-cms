@@ -2,6 +2,8 @@ var session = require('express-session');
 var csurf = require('csurf');
 var store = require('connect-mongo')(session);
 var flash = require('connect-flash');
+var upload = require('express-fileupload')
+
 module.exports = function (app,connection) {
     /** 
      * Express-session middleware
@@ -14,6 +16,7 @@ module.exports = function (app,connection) {
             mongooseConnection:connection
         })
     }));
+    app.use(upload())
     /**
      * CSRF middleware
      */

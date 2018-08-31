@@ -25,6 +25,7 @@ router.get('/', function (req, res, next) {
 
 
 require('./admin_routes/cms')(router);
+require('./admin_routes/gallery')(router);
 
 
 module.exports = router;
