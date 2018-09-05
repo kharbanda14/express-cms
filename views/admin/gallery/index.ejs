@@ -23,6 +23,15 @@
 
 <div class="card">
     <div class="card-body">
-        IMAGES
+        <h4>Images</h4>
+        <div class="row">
+            <% if (locals.gallery) {
+                gallery.forEach(function (img) { %>
+                    <div class="col-md-3 each_gallery_img">
+                        <img class="gallery_img" src="<%= img.medium%>" alt="" srcset="">
+                    </div>
+               <% }) 
+            }%>
+        </div>
     </div>
 </div>
