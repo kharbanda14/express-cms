@@ -1,0 +1,22 @@
+<li class="nav-title">CMS</li>
+{% if post_types.length > 0 %}
+    {% for post in post_types %}
+        <li class="nav-item {{ post.sub_menu.length > 0 ? 'nav-dropdown' : '' }}">
+            <a class="nav-link {{ post.sub_menu.length > 0 ? 'nav-dropdown-toggle' : '' }}" href="#">
+                <i class="{{ post.icon }}"></i>
+                {{ post.nice_name }}
+            </a>
+            {% if post.sub_menu.length > 0 %}
+                {% for sub_item in post.sub_menu %}
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ admin_baseurl }}/cms/{{post.slug}}/{{sub_item.action}}">
+                                <i class="{{ sub_item.icon }}"></i>
+                                {{ sub_item.title }}
+                            </a>
+                        </li>
+                    </ul>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}

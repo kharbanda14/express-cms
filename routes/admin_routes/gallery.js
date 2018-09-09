@@ -7,19 +7,17 @@ const gallery_model = require('../../models/gallery_model');
 module.exports = function (router) {
     router.get('/gallery', async (req, res) => {
         var data = {
-
-            load_page: 'gallery/index.ejs',
             gallery: await gallery_model.getGallery()
-
         }
-        // return res.send(data);
-        res.render('admin/index', data)
+        //return res.send(data);
+        res.render('admin/gallery/index', data)
     })
 
     router.post('/gallery', async (req, res) => {
         try {
             var re = await file_uploader.upload_gallery(req.files.images, req);
-            res.send(re);
+            return res.redirect(req.originalUrl)
+            //res.send(re);
         } catch (error) {
             res.send(error);
         }

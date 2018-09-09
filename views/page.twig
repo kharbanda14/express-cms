@@ -1,0 +1,12 @@
+{% extends 'layouts/default.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>
+            {{ post.title }}
+        </h1>
+        <p>
+            {{ post.content_rendered }}
+        </p>
+    </div>
+{% endblock %}

@@ -19,7 +19,6 @@ router.use(function (req, res, next) {
 router.get('/', function (req, res, next) {
     res.render('admin/index', {
         title: 'Express',
-        page: 'index.ejs'
     });
 });
 

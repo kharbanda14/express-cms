@@ -23,7 +23,7 @@ module.exports = function (router) {
                 form_err_msg: req.flash('form_err_msg'),
             }
             // return res.send(data);
-            res.render('admin/index', data)
+            res.render('admin/post/index', data)
         } else if (action == 'edit' && id !== undefined) {
             var data = {
                 post_type: post_types[check.indexOf(post_type)],
@@ -34,11 +34,10 @@ module.exports = function (router) {
                 form_err_msg: req.flash('form_err_msg'),
             }
             //return res.send(data);
-            res.render('admin/index', data)
+            res.render('admin/post/index', data)
         } else {
             var data = {
                 post_type: post_types[check.indexOf(post_type)],
-                load_page: 'post/view_all.ejs',
                 posts: []
             }
             data.posts = await Post.get_all_posts({
@@ -48,7 +47,7 @@ module.exports = function (router) {
                 post_type: post_type
             })
             //return res.send(data);
-            res.render('admin/index', data)
+            res.render('admin/post/view_all.twig', data)
         }
 
     });

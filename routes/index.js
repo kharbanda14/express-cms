@@ -3,9 +3,9 @@ var router = express.Router();
 const post_model = require('../models/posts_model');
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('layouts/default', {
+  res.render('index', {
     title: 'Express',
-    page: 'index.ejs'
+    
   });
 });
 
@@ -22,13 +22,14 @@ router.get('/:slug', async (req, res, next) => {
     if (post) {
       var load_data = {
         post: post,
+        title:post.title,
         page: 'post'
       };
       if (post.post_type == 'post') {
-        res.render('layouts/default', load_data)
+        res.render('post', load_data)
       } else if (post.post_type == 'page') {
         load_data.page = 'page';
-        res.render('layouts/default', load_data)
+        res.render('page', load_data)
 
       } else {
 
