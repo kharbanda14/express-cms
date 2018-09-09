@@ -1,103 +1,110 @@
 {% extends 'admin/index.twig' %}
 
+{% block additional_css %}
+    <link rel="stylesheet" href="/admin_assets/vendors/simplemde/dist/simplemde.min.css">
+{% endblock %}
+{% block additional_js %}
+    <script src="/admin_assets/vendors/simplemde/dist/simplemde.min.js"></script>
+    <script>
+        window.onload = function () {
+            var simplemde = new SimpleMDE({element: document.getElementById('content')});
+            console.log(simplemde)
+        }
+    </script>
+{% endblock %}
+
+
 {% block body %}
-<link rel="stylesheet" href="/admin_assets/vendors/simplemde/dist/simplemde.min.css">
-<script src="/admin_assets/vendors/simplemde/dist/simplemde.min.js"></script>
-<script>
-    window.onload = function () {
-        var simplemde = new SimpleMDE({element: document.getElementById('content')});
-        console.log(simplemde)
-    }
-</script>
+    {% include 'admin/partials/gallery_selector.twig' %}
+    <h2>Create
+        {{ post_type.singular }}
+    </h2>
 
-<h2>Create
-    {{ post_type.singular }}
-</h2>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    {% if success_msg.length > 0 %}
+                        <div class="alert alert-success">
+                            {{ success_msg }}
+                        </div>
+                    {% endif %}
+                    {% if form_err_msg.length > 0 %}
+                        <div class="alert alert-danger">
+                            {{ form_err_msg }}
+                        </div>
+                    {% endif %}
 
-<div class="row">
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-body">
-                {% if success_msg.length > 0 %}
-                    <div class="alert alert-success">
-                        {{ success_msg }}
-                    </div>
-                {% endif %}
-                {% if form_err_msg.length > 0 %}
-                    <div class="alert alert-danger">
-                        {{ form_err_msg }}
-                    </div>
-                {% endif %}
+                    <form method="POST">
+                        <div class="form-group">
+                            <label for="title">Title :</label>
+                            <input type="text" class="form-control" value="{{existing_data.title}}" name="title" id="title">
+                            {% if form_err.title %}
+                                <span class="help-block text-danger">Please enter title</span>
+                            {% endif %}
 
-                <form method="POST">
-                    <div class="form-group">
-                        <label for="title">Title :</label>
-                        <input type="text" class="form-control" value="{{existing_data.title}}" name="title" id="title">
-                        {% if form_err['title'] %}
-                            <span class="help-block text-danger">Please enter title</span>
-                        {% endif %}
-
+                        </div>
+                        <div class="form-group">
+                            <label for="content">Content :</label>
+                            <textarea type="text" class="form-control" name="content" id="content">{{existing_data.content}}</textarea>
+                            {% if form_err.content %}
+                                <span class="help-block text-danger">Please enter content</span>
+                            {% endif %}
+                        </div>
+                        {{_csrfInput}}
+                        <input type="submit" value="SAVE" class="btn btn-primary">
                     </div>
-                    <div class="form-group">
-                        <label for="content">Content :</label>
-                        <textarea type="text" class="form-control" name="content" id="content">{{existing_data.content}}</textarea>
-                        {% if form_err['content'] %}
-                            <span class="help-block text-danger">Please enter content</span>
-                        {% endif %}
-                    </div>
-                    {{_csrfInput}}
-                    <input type="submit" value="SAVE" class="btn btn-primary">
-                </form>
-            </div>
+                </div>
+                {% include 'admin/post/partials/post_extras.twig' %}
+            </form>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-header">
-                Details
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <table class="table table-striped">
-                        {% if existing_data.created_at %}
-                            <tr>
-                                <td>
-                                    <strong>Published :</strong>
-                                </td>
-                                <td>
-                                    {{moment(existing_data.created_at).format('MMMM Do YYYY, h:mm a') }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>Last Edited :</strong>
-                                </td>
-                                <td>
-                                    {{moment(existing_data.last_edited).format('MMMM Do YYYY, h:mm a')}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>User :</strong>
-                                </td>
-                                <td>
-                                    {{existing_data.user_id.username}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>Post Status :</strong>
-                                </td>
-                                <td>
-                                    <span class="badge badge-{{existing_data.post_status == 'published' ? 'success' :'danger'}}">{{existing_data.post_status == 'published' ? 'Published' :''}}</span>
-                                </td>
-                            </tr>
-                        {% endif %}
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Details
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <table class="table table-striped">
+                            {% if existing_data.created_at %}
+                                <tr>
+                                    <td>
+                                        <strong>Published :</strong>
+                                    </td>
+                                    <td>
+                                        {{moment(existing_data.created_at).format('MMMM Do YYYY, h:mm a') }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Last Edited :</strong>
+                                    </td>
+                                    <td>
+                                        {{moment(existing_data.last_edited).format('MMMM Do YYYY, h:mm a')}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>User :</strong>
+                                    </td>
+                                    <td>
+                                        {{existing_data.user_id.username}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Post Status :</strong>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-{{existing_data.post_status == 'published' ? 'success' :'danger'}}">{{existing_data.post_status == 'published' ? 'Published' :''}}</span>
+                                    </td>
+                                </tr>
+                            {% endif %}
 
-                    </table>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

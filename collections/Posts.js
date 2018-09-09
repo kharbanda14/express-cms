@@ -38,6 +38,20 @@ var structure = {
         enum:['published','draft'],
         default:'published',
     },
+    seo:{
+        title:{
+            type:String,
+            trim:true,
+        },
+        description:{
+            type:String,
+            trim:true,
+        },
+        tags:{
+            type:String,
+            trim:true,
+        },
+    },
     feautred_image:{
         type:mongoose.Schema.Types.ObjectId,
         default:null

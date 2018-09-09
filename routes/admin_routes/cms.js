@@ -58,6 +58,7 @@ module.exports = function (router) {
             id
         } = req.params;
         const post = req.body;
+        //return res.send(post);
         if (check.indexOf(post_type) === -1) {
             return res.send('nope')
         }
@@ -85,8 +86,9 @@ module.exports = function (router) {
             }
             res.redirect(redirect_url);
         } catch (error) {
-            console.log(error)
-            req.flash('form_err', error.message);
+            //console.log(error)
+            //res.send(error);
+            req.flash('form_err', error.errors);
             req.flash('form_err_msg', error.message);
             req.flash('existing_data', req.body);
             res.redirect(req.originalUrl);

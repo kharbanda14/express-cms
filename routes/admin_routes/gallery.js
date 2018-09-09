@@ -5,9 +5,12 @@ const path = require('path');
 const file_uploader = require('../../lib/file_uploader');
 const gallery_model = require('../../models/gallery_model');
 module.exports = function (router) {
-    router.get('/gallery', async (req, res) => {
+    router.get('/gallery/:format?', async (req, res) => {
         var data = {
             gallery: await gallery_model.getGallery()
+        }
+        if (req.params.format == 'json') {
+            return res.send(data.gallery);
         }
         //return res.send(data);
         res.render('admin/gallery/index', data)

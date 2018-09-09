@@ -1,5 +1,12 @@
 {% extends 'layouts/default.twig' %}
 
+{% block metatags %}
+<meta name="title" content="{{ post.seo.title ? post.seo.title : post.title }}">
+<meta name="description" content="{{ post.seo.description ? post.seo.description : 'default description' }}">
+
+{% endblock %}
+
+
 {% block body %}
     <div class="container">
         <h1>

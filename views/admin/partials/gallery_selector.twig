@@ -1,0 +1,11 @@
+<script>
+    function GalleryApi () {
+        this.base_url = '{{ admin_baseurl }}'
+        this.get = () => {
+            return fetch(`${this.base_url}/gallery/json`)
+            .then(response => response.json())
+        }
+    }
+    var gallery = new GalleryApi();
+    gallery.get().then(data => console.log(data));
+</script>

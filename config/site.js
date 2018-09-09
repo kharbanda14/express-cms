@@ -4,7 +4,8 @@ module.exports.config = {
     base_url:'http://localhost:3000/',
     meta:{
         title:'Express CMS',
-        description:'CMS Built On Express.js'
+        description:'CMS Built On Express.js',
+        author:'Aman Kharbanda'
     }
 
 }

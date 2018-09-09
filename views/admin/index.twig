@@ -12,6 +12,7 @@
         <title>{{ meta.title }}
             | Dashboard</title>
         {% include 'admin/partials/includes.twig' %}
+        {% block additional_css %}{% endblock %}
     </head>
 
     <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
@@ -408,6 +409,7 @@
             </div>
         </footer>
         {% include 'admin/partials/vendor.twig' %}
+        {% block additional_js %}{% endblock %}
     </body>
 
 </html>
