@@ -25,6 +25,7 @@ router.get('/:slug', async (req, res, next) => {
         title:post.title,
         page: 'post'
       };
+      //return res.send(post);
       if (post.post_type == 'post') {
         res.render('post', load_data)
       } else if (post.post_type == 'page') {

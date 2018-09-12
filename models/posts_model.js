@@ -27,7 +27,12 @@ module.exports.getPostById = function (id) {
         path: 'user_id',
         ref: 'users',
         select: 'first_name last_name username'
-    }).lean().exec();
+    })
+    .populate({
+        path: 'featured_image',
+        ref: 'gallery',
+    })
+    .lean().exec();
 }
 
 module.exports.getPostBySlug = (slug) => {
@@ -51,7 +56,12 @@ module.exports.fetchSinglPost = (query = {}) => {
                 path: 'user_id',
                 ref: 'users',
                 select: 'first_name last_name username email'
-            }).lean().exec().then(
+            })
+            .populate({
+                path: 'featured_image',
+                ref: 'gallery',
+            })
+            .lean().exec().then(
                 (post) => {
                     if (post) {
                         marked.parse(post.content, (err, parsed) => {

@@ -52,9 +52,10 @@ var structure = {
             trim:true,
         },
     },
-    feautred_image:{
+    featured_image: {
         type:mongoose.Schema.Types.ObjectId,
-        default:null
+        default:null,
+        ref:'gallery'
     },
     created_at: {
         type: Number,

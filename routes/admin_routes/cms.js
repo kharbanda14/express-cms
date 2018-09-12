@@ -33,7 +33,7 @@ module.exports = function (router) {
                 success_msg: req.flash('success_msg'),
                 form_err_msg: req.flash('form_err_msg'),
             }
-            //return res.send(data);
+            // return res.send(data);
             res.render('admin/post/index', data)
         } else {
             var data = {

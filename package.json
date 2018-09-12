@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www -e js,twig"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www -e js,twig"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",

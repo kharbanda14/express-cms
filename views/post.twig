@@ -9,6 +9,10 @@
 
 {% block body %}
     <div class="container">
+        {% if post.featured_image %}
+            <img class="featured-image" src="{{post.featured_image.large}}">
+        {% endif %}
+        
         <h1>
             {{ post.title }}
         </h1>
