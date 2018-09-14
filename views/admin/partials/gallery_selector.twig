@@ -14,6 +14,16 @@
         `;
         return previewImgHtml;
     }
+
+    function getMarkdownImage(src, html = false, htmlclass = '') {
+        var txt = `![](${src})`;
+        //html = html || false
+
+        if (html) {
+            txt = `<img src="${src}" class="${htmlclass}">`;
+        }
+        return txt;
+    }
     $(document).ready(function () {
         $('#gallerySelector').on('shown.bs.modal', async function (ev) {
             const btn = $(ev.relatedTarget);
@@ -21,24 +31,34 @@
             config = {
                 max: btn.data('max'),
                 input: btn.data('input'),
-                preview: btn.data('preview')
+                preview: btn.data('preview'),
+                action: btn.data('action')
             }
 
             processImages(imgs)
             updateImageCount()
         })
         $('#finalSelect').on('click', function () {
-            const finalised = []
-            $(config.preview).html('')
-            images.forEach((v, key) => {
-                finalised.push(key)
+            if (config.action == 'featured-image') {
+                const finalised = []
+                $(config.preview).html('')
+                images.forEach((v, key) => {
+                    finalised.push(key)
 
-                $(config.preview).append(getPreviewHtml(v));
-            })
-            if (config.max == 1) {
-                $(config.input).val(finalised[0]);
-            }
-            console.log(finalised);
+                    $(config.preview).append(getPreviewHtml(v));
+                })
+                if (config.max == 1) {
+                    $(config.input).val(finalised[0]);
+                }
+                console.log(finalised);
+            } else if (config.action == 'post-images') {
+                var prepared = '';
+                images.forEach((v, key) => {
+                    prepared += '\n' + getMarkdownImage(v);
+                });
+                window.simplemde.value(window.simplemde.value() + prepared);
+
+            } else {}
         })
     })
 
@@ -88,7 +108,6 @@
 <div class="modal fade" id="gallerySelector">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">Gallery</h4>

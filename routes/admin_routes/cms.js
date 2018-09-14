@@ -74,6 +74,10 @@ module.exports = function (router) {
                     post.slug = slug + '-' + Math.random().toString(32).substr(2, 5)
                 }
 
+                if (post.featured_image == '') {
+                    post.featured_image = null;
+                }
+
                 let newpost = await Post.create_post(post);
                 redirect_url = path.dirname(req.originalUrl) + '/edit/' + newpost._id;
                 req.flash('success_msg', 'Post Created!')
