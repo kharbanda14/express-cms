@@ -1,0 +1,104 @@
+{% extends "admin/index.twig" %}
+
+{% block body %}
+<div class="modal fade" id="addMenuModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addNewMenu">
+                    <div class="form-group">
+                        <label for="name">Title:</label>
+                        <input type="text" name="title" class="form-control">
+                        {{_csrfInput}}
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary" value="Save Changes">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addLinkModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addNewLink">
+                    <div class="form-group">
+                        <label for="name">Title:</label>
+                        <input type="text" name="title" class="form-control">
+                        <label for="name">Url:</label>
+                        <input type="text" name="url" class="form-control">
+                                         
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" name="openInNewTab" class="form-check-input" > Open in New Tab ?
+                        </label>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <span id="menuAddedText" class="text text-success">Menu Added</span>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary" value="ADD">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#addMenuModal">
+                    <i class="fa fa-plus"></i>
+                    Add Menu
+                </button>
+                <h4 class="my-3">List of Menus <span class="badge badge-secondary">{{menu.length}}</span> </h4>
+                <div class="list-group">
+                    {% if menu.length > 0 %}
+                    {% for item in menu %}
+                    <a href="menu#{{item._id}}" class="list-group-item">{{ item.title }}</a>
+                    {% endfor %}
+                    {% else %}
+                    <div class="alert alert-info">
+                        No Menu Found
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card menuSwitch" style="display:none;">
+            <div class="card-body">
+                <h4 id="menuTitle" class="mb-4"></h4>
+                <div id="menuSavedAlert" class="alert alert-success">Menu Saved</div>
+                <div class="list-group" id="show_menu_links"> </div>
+               
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary mt-2" data-toggle="modal" data-target="#addLinkModal">ADD LINKS</button>
+                <button class="btn btn-success mt-2" id="saveMenu">SAVE</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block additional_js %}
+<script src="{{base_url}}admin_assets/js/menu.js"></script>
+{% endblock %}

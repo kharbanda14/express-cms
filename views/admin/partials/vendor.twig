@@ -1,5 +1,9 @@
 <!-- CoreUI and necessary plugins-->
-
+<script>
+    window.base_url = '{{admin_baseurl}}';
+    window.csrfToken = '{{_csrf}}';
+</script>
+<script src="{{base_url}}admin_assets/js/fetch_api.js"></script>
 <script src="/admin_assets/vendors/popper.js/js/popper.min.js"></script>
 <script src="/admin_assets/vendors/bootstrap/js/bootstrap.min.js"></script>
 <script src="/admin_assets/vendors/pace-progress/js/pace.min.js"></script>
@@ -9,3 +13,4 @@
 <!-- <script src="/admin_assets/vendors/chart.js/js/Chart.min.js"></script> -->
 <script src="/admin_assets/vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
 <!-- <script src="/admin_assets/js/main.js"></script> -->
+<script defer src="/admin_assets/vendors/jquery-ui.min.js"></script>

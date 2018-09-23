@@ -14,7 +14,7 @@ module.exports.count_posts = function (query) {
     return Post.find(query).countDocuments()
 }
 
-module.exports.get_all_posts = function (query = {}, limit = 10, skip = 0) {
+module.exports.get_all_posts = function (query = {}, limit = 5, skip = 0) {
     return Post.find(query).limit(limit).skip(skip).populate({
         path: 'user_id',
         ref: 'users',

@@ -16,27 +16,29 @@
                         <th>Action</th>
                     </tr>
                     {% for post in posts %}
-                        <tr>
-                            <td>{{loop.index}}</td>
-                            <td>{{post._id }}</td>
-                            <td>{{post.title }}</td>
-                            <td>
-                                <div class="btn-group">
-                                    <a href="/{{post.slug }}" class="btn btn-success">
-                                        <i class="fa fa-eye"></i>
-                                        View</a>
-                                    <a href="{{ admin_baseurl }}/cms/{{post_type.type }}/edit/{{post._id }}" class="btn btn-primary">
-                                        <i class="fa fa-pencil"></i>
-                                        Edit</a>
-                                    <a href="" class="btn btn-danger">
-                                        <i class="fa fa-trash"></i>
-                                        Delete</a>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>{{start_i + 1}}</td>
+                        <td>{{post._id }}</td>
+                        <td>{{post.title }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="/{{post.slug }}" class="btn btn-success">
+                                    <i class="fa fa-eye"></i>
+                                    View</a>
+                                <a href="{{ admin_baseurl }}/cms/{{post_type.type }}/edit/{{post._id }}" class="btn btn-primary">
+                                    <i class="fa fa-pencil"></i>
+                                    Edit</a>
+                                <a href="" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                    Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% set start_i = start_i + 1 %}
                     {% endfor %}
 
                 </table>
+                {% include "admin/partials/pagination.twig" with {max_page:max_page, current : page} %}
             </div>
         </div>
     </div>

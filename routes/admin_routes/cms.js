@@ -2,9 +2,13 @@ const post_types = require('../../config/post_types');
 const Post = require('../../models/posts_model');
 const check = post_types.map(v => v.type);
 const path = require('path');
+const paginator = require('../../lib/pagination');
 
 module.exports = function (router) {
     router.get('/cms/:post_type?/:action?/:id?', async function (req, res) {
+        const {
+            page
+        } = req.query;
         const {
             post_type,
             action,
@@ -40,13 +44,22 @@ module.exports = function (router) {
                 post_type: post_types[check.indexOf(post_type)],
                 posts: []
             }
+            const {
+                limit,
+                skip
+            } = paginator.getPaginationOptions(page)
+
             data.posts = await Post.get_all_posts({
                 post_type: post_type
-            });
+            }, limit, skip);
             data.post_count = await Post.count_posts({
                 post_type: post_type
             })
-            //return res.send(data);
+            data.start_i = skip;
+            data.page = page ? parseInt(page) : 1;
+            data.max_page = (data.post_count % limit) == 0 ? (data.post_count / limit) : (Math.floor((data.post_count / limit)) + 1)
+            data.max_page = data.max_page == 0 ? 1 : data.max_page;
+            // return res.send(data);
             res.render('admin/post/view_all.twig', data)
         }
 
