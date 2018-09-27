@@ -27,6 +27,7 @@ require('./admin_routes/cms')(router);
 require('./admin_routes/admin_ajax')(router);
 require('./admin_routes/gallery')(router);
 require('./admin_routes/customization')(router);
+require('./admin_routes/forms')(router);
 
 
 module.exports = router;

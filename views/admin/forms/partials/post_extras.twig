@@ -1,0 +1,26 @@
+<div class="card">
+    <div class="card-body">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#post_seo">SEO</a>
+            </li>
+
+        </ul>
+        <div class="tab-content">
+            <div id="post_seo" class="container tab-pane active"><br>
+                <div class="form-group">
+                    <label for="">SEO Title</label>
+                    <input class="form-control" type="text" value="{{existing_data.seo.title}}" name="seo[title]">
+                </div>
+                <div class="form-group">
+                    <label for="">SEO Description</label>
+                    <input class="form-control" value="{{existing_data.seo.description}}" type="text" name="seo[description]">
+                </div>
+                <div class="form-group">
+                    <label for="">SEO Tags</label>
+                    <input class="form-control" value="{{existing_data.seo.tags}}" type="text" name="seo[tags]">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

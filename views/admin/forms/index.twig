@@ -1,0 +1,59 @@
+{% extends 'admin/index.twig' %}
+
+{% block additional_js %}
+
+{% endblock %}
+
+{% block body %}
+
+<h2>Create Form</h2>
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                {% if form_success.length > 0 %}
+                <div class="alert alert-success">{{form_success}}</div>
+                {% endif %}
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="title">
+                            <h4>Title</h4>
+                        </label>
+                        <input type="text" name="title" value="{{existing_data.title}}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">
+                            <h4>Description</h4>
+                        </label>
+                        <textarea class="form-control" name="description" cols="30" rows="10">{{existing_data.description}}</textarea>
+                    </div>
+                    {{_csrfInput}}
+                    <input type="submit" value="{{form_btn_text}}" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <button class="btn btn-primary" id="saveMenu">SAVE</button>
+                <h4>Fields</h4>
+                <div class="list-group">
+                    <div class="list-group-item" id="addTextField">
+                        Text
+                    </div>
+                    <div class="list-group-item">
+                        Number
+                    </div>
+                    <div class="list-group-item">
+                        Date
+                    </div>
+                    <div class="list-group-item">
+                        Select
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

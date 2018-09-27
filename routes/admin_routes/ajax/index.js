@@ -14,5 +14,8 @@ module.exports = {
     },
     update_menu: function (body) {
         return menuModel.updateMenu(body.id,body)
+    },
+    submit_form:function (body) {
+        return body;
     }
 }

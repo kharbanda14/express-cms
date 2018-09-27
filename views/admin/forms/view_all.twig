@@ -1,0 +1,52 @@
+{% extends 'admin/index.twig'%}
+
+{% block body %}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h1>Forms <a href="create" class="btn btn-primary">CREATE</a> </h1>
+                {% if forms %}
+                <table class="table">
+                    <tr>
+                        <th>No.</th>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for form in forms %}
+                    <tr>
+                        <td>{{start_i + 1}}</td>
+                        <td>{{form._id }}</td>
+                        <td>{{form.title }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="/{{form._id }}" class="btn btn-success">
+                                    <i class="fa fa-eye"></i>
+                                    View</a>
+                                <a href="{{ admin_baseurl }}/forms/edit/{{form._id }}" class="btn btn-primary">
+                                    <i class="fa fa-pencil"></i>
+                                    Edit</a>
+                                <a href="" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                    Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% set start_i = start_i + 1 %}
+                    {% endfor %}
+
+                </table>
+                {% else %}
+                <div class="alert alert-info">
+                    No Forms Found!
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
