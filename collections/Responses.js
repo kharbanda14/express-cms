@@ -10,15 +10,32 @@ var structure = {
         ref: 'forms'
     },
     body: {
-        type: Array,
+        type: Object,
         required:true,
     },
     tracking: {
         ip : {
             type:String,
         },
-        source_url : {
+        utm_source :{
             type:String,
+            trim:true
+        },
+        utm_medium: {
+            type:String,
+            trim:true
+        },
+        utm_campaign: {
+            type:String,
+            trim:true
+        },
+        utm_term: {
+            type:String,
+            trim:true
+        },
+        utm_content: {
+            type:String,
+            trim:true
         },
     },
     created_at: {

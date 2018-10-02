@@ -1,11 +1,20 @@
 {% extends 'admin/index.twig' %}
 
+{% block additional_css %}
+<link rel="stylesheet" href="/admin_assets/vendors/simplemde/dist/simplemde.min.css">
+{% endblock %}
 {% block additional_js %}
-
+<script src="/admin_assets/vendors/simplemde/dist/simplemde.min.js"></script>
+<script>
+    window.onload = function () {
+        var simplemde = new SimpleMDE({
+            element: document.getElementById('content')
+        });
+    }
+</script>
 {% endblock %}
 
 {% block body %}
-
 <h2>Create Form</h2>
 <div class="row">
     <div class="col-md-8">
@@ -25,7 +34,8 @@
                         <label for="description">
                             <h4>Description</h4>
                         </label>
-                        <textarea class="form-control" name="description" cols="30" rows="10">{{existing_data.description}}</textarea>
+
+                        <textarea type="text" id="content" class="form-control" name="description">{{existing_data.description}}</textarea>
                     </div>
                     {{_csrfInput}}
                     <input type="submit" value="{{form_btn_text}}" class="btn btn-primary">
@@ -36,22 +46,7 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-body">
-                <button class="btn btn-primary" id="saveMenu">SAVE</button>
-                <h4>Fields</h4>
-                <div class="list-group">
-                    <div class="list-group-item" id="addTextField">
-                        Text
-                    </div>
-                    <div class="list-group-item">
-                        Number
-                    </div>
-                    <div class="list-group-item">
-                        Date
-                    </div>
-                    <div class="list-group-item">
-                        Select
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>

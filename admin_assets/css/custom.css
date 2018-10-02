@@ -43,3 +43,6 @@
 #menuSavedAlert {
     display: none;
 }
+.fw-light {
+    font-weight: 300;
+}

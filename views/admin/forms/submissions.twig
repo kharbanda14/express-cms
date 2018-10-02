@@ -1,0 +1,34 @@
+{% extends 'admin/index.twig'%}
+
+{% block body %}
+<div class="card">
+    <div class="card-body">
+        <h2 class="fw-light">Submissions ( {{ submissions_count }} )</h2>
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th>No.</th>
+                    {% for key,head in table_heads %}
+                    <th>
+                        <a href="?order_by={{key}}&sort={{ query.sort == 'asc' and query.order_by == key ? 'desc' : 'asc' }}">{{ head }}</a>
+                    </th>
+                    {% endfor %}
+                    <th>Created</th>
+                </tr>
+                
+                {% for sub in submissions %}
+                <tr>
+                    <td>{{ start_i + 1 }}</td>
+                    {% for val in sub.body %}
+                    <td> {{ val }} </td>
+                    {% endfor %}
+                    <td>{{ moment(sub.created_at).format('Y-MM-D h:mm A') }}</td>
+                </tr>
+                {% set start_i = start_i + 1 %}
+                {% endfor %}
+            </table>
+            {% include 'admin/partials/pagination2.twig' %}
+        </div>
+    </div>
+</div>
+{% endblock %}

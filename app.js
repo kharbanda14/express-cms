@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
 var authRouter = require('./routes/auth');
+var formRouter = require('./routes/forms');
 const db = require('./config/db');
 var app = express();
 
@@ -30,6 +31,7 @@ require('./static_files')(app,express);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
+app.use('/forms', formRouter);
 app.use(require('./config/admin').path, adminRouter);
 
 // catch 404 and forward to error handler

@@ -1,0 +1,49 @@
+{% extends "layouts/default.twig" %}
+
+{% block title %}
+Forms | {{form.title}}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>{{form.title}}</h1>
+    <p>{{form.description}}</p>
+    {% if success_msg.length > 0 %}
+    <div class="alert alert-success">
+        {{success_msg}}
+    </div>
+    {% endif %}
+    {% if form.fields.length > 0 %}
+    <form method="POST" action="{{base_url}}forms/submit/{{form._id}}" novalidate>
+        {% for field in form.fields %}
+        <div class="form-group">
+            <label for="{{field.name}}">{{field.nice_name}}</label>
+            {% if field.type == 'text' %}
+            <input type="text" name="body[{{field.name}}]" {{field.required ? 'required' : ''}} class="form-control">
+            {% elseif field.type == 'number' %}
+            <input type="number" name="body[{{field.name}}]" class="form-control">
+            {% elseif field.type == 'email' %}
+            <input type="email" name="body[{{field.name}}]" class="form-control">
+            {% elseif field.type == 'textarea' %}
+            <textarea name="body[{{field.name}}]" id="{{field.name}}" class="form-control"></textarea>
+            {% else %}
+
+            {% endif %}
+
+            <span class="text-danger">{{form_error[field.name]}}</span>
+
+        </div>
+        {% endfor %}
+        <input type="hidden" name="form_id" value="{{form._id}}">
+        <input type="hidden" name="tracking[utm_source]" value="{{query.utm_source}}">
+        <input type="hidden" name="tracking[utm_medium]" value="{{query.utm_medium}}">
+        <input type="hidden" name="tracking[utm_campaign]" value="{{query.utm_campaign}}">
+        <input type="hidden" name="tracking[utm_term]" value="{{query.utm_term}}">
+        <input type="hidden" name="tracking[utm_content]" value="{{query.utm_content}}">
+        {{ _csrfInput }}
+        <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+    {% endif %}
+
+</div>
+{% endblock %}

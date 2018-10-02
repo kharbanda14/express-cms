@@ -9,6 +9,7 @@
             <div class="card-body">
                 <h1>Forms <a href="create" class="btn btn-primary">CREATE</a> </h1>
                 {% if forms %}
+                <div class="table-responsive">
                 <table class="table">
                     <tr>
                         <th>No.</th>
@@ -19,11 +20,12 @@
                     {% for form in forms %}
                     <tr>
                         <td>{{start_i + 1}}</td>
-                        <td>{{form._id }}</td>
+                        <td>
+                            <a href="{{ admin_baseurl }}/forms/submissions/{{form._id }}">{{form._id }}</a> </td>
                         <td>{{form.title }}</td>
                         <td>
                             <div class="btn-group">
-                                <a href="/{{form._id }}" class="btn btn-success">
+                                <a href="/forms/{{form._id }}" class="btn btn-success">
                                     <i class="fa fa-eye"></i>
                                     View</a>
                                 <a href="{{ admin_baseurl }}/forms/edit/{{form._id }}" class="btn btn-primary">
@@ -32,6 +34,7 @@
                                 <a href="" class="btn btn-danger">
                                     <i class="fa fa-trash"></i>
                                     Delete</a>
+                                
                             </div>
                         </td>
                     </tr>
@@ -39,6 +42,7 @@
                     {% endfor %}
 
                 </table>
+                </div>
                 {% else %}
                 <div class="alert alert-info">
                     No Forms Found!

@@ -1,5 +1,10 @@
 const form_model = require('../../models/forms_model');
 const adminConfig = require('../../config/admin');
+const responses_model = require('../../models/responses_model');
+
+const forms = require('../../handlers/form');
+
+const paginator = require('../../lib/pagination');
 
 module.exports = function (router) {
     router.route('/forms/:action?/:id?')
@@ -27,6 +32,40 @@ async function getFrom(req, res) {
             return res.redirect(adminConfig.path + '/forms/');
         }
         return res.render('admin/forms/index', data);
+    }
+    if (action == 'submissions' && id) {
+        try {
+            if (id in forms) {
+                let docQuery = {
+                    form_id: id
+                }
+                data.submissions_count = await responses_model.count_submissions(docQuery)
+                let {page, order_by, sort} = req.query;
+                let pgOpts = paginator.getPaginationOptions(page, data.submissions_count);
+                let {limit,skip} = pgOpts;
+                let sortObj = {}
+                if (order_by && sort) {
+                    let field = `body.${order_by}`;
+                    sortObj[field] = sort
+                }
+                data.submissions = await responses_model.getSubmissions(docQuery, limit, skip, sortObj);
+                data.pagination = pgOpts;
+                data.start_i = skip;
+                data.query = req.query;
+                let table_heads = {};
+                forms[id].fields.forEach(v => {
+                    table_heads[v.name] = v.nice_name;
+                })
+                data.table_heads = table_heads;
+            } else {
+                throw 'Form Handler Not Registered!';
+            }
+        } catch (error) {
+            console.log(error)
+            return res.send(error);
+            return res.redirect(adminConfig.path + '/forms/');
+        }
+        return res.render('admin/forms/submissions', data);
     }
     data.forms = await form_model.getAll();
     data.start_i = 0;
