@@ -1,0 +1,14 @@
+<div class="col-md-4">
+    <form action="/newsletter/subscribe" method="POST">
+        <div class="form-group">
+            <label for="name">Name :</label>
+            <input type="text" name="name" id="name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="email">Email :</label>
+            <input type="email" name="email" id="email" class="form-control">
+        </div>
+        {{ _csrfInput }}
+        <input type="submit" value="Subscribe" class="btn btn-primary">
+    </form>
+</div>

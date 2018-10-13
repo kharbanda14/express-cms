@@ -41,7 +41,7 @@ app.use(function(req, res, next) {
 
 global.APP_DIR = __dirname;
 global.UPLOAD_DIR = __dirname+'/uploads';
-
+global.mem_cache = new Map();
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

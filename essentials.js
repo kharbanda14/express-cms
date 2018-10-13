@@ -20,6 +20,8 @@ module.exports = function (app) {
         res.locals.debug = (obj) => console.log(obj);
         res.locals.nav_menu = await menuModel.get_menu();
         res.locals.getQueryString = queryLib.generateQueryUrl(req.originalUrl);
+        res.locals.success_msg = req.flash('success_msg');
+        res.locals.error_msg = req.flash('error_msg');
         next();
     })
 }

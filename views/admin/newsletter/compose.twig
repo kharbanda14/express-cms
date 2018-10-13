@@ -1,0 +1,61 @@
+{% extends 'admin/index.twig' %}
+
+{% block additional_css %}
+<link rel="stylesheet" href="/admin_assets/vendors/simplemde/dist/simplemde.min.css">
+{% endblock %}
+{% block additional_js %}
+<script src="/admin_assets/vendors/simplemde/dist/simplemde.min.js"></script>
+<script>
+    window.onload = function () {
+        var simplemde = new SimpleMDE({
+            element: document.getElementById('body')
+        });
+        window.simplemde = simplemde;
+        console.log(simplemde)
+    }
+</script>
+{% endblock %}
+
+{% block body %}
+{% include "admin/partials/gallery_selector.twig" %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                {% if msg_sent.length > 0 %}
+                <div class="alert alert-success"> {{ msg_sent }} </div>
+                {% endif %}
+                {% if msg_error.length > 0 %}
+                <div class="alert alert-danger"> {{ msg_error }} </div>
+                {% endif %}
+                <h1 class="fw-light mb-2">Compose</h1>
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="email">To</label>
+                        <input type="text" name="email" id="email" value="{{ existing.email }}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" name="subject" id="subject" class="form-control" value="{{ existing.subject }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="body">Body</label>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-action="post-images"
+                                    data-max="0" data-target="#gallerySelector">
+                                    Add Images
+                                </button>
+                            </div>
+                        </div>
+
+                        <textarea name="body" id="body" class="form-control">{{ existing.body }}</textarea>
+                    </div>
+                    {{_csrfInput}}
+                    <input type="submit" value="Send" class="btn btn-success">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
