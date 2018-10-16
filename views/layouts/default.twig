@@ -1,30 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>
-            {% block title %}
-                {{title}}
-            {% endblock %}
-        </title>
-        {% block metatags %}
-            <meta name="title" content="{{meta.title}}">
-            <meta name="description" content="{{meta.description}}">
-            <meta name="author" content="{{meta.author}}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        {% block title %}
+        {{meta.title}}
         {% endblock %}
-        {% include 'partials/vendor.twig' %}
-        {% include 'partials/includes.twig' %}
+    </title>
+    {% block metatags %}
+    <meta name="title" content="{{meta.title}}">
+    <meta name="description" content="{{meta.description}}">
+    <meta name="author" content="{{meta.author}}">
+    {% endblock %}
+    {% include 'partials/vendor.twig' %}
+    {% include 'partials/includes.twig' %}
 
-    </head>
+</head>
 
-    <body>
-        {% include 'partials/navbar.twig' %}
-        {% block header %}
-            {% include 'partials/header.twig' %}
-        {% endblock %}
-        {% block body %}{% endblock %}
-    </body>
+<body>
+    {% include 'partials/navbar.twig' %}
+    {% block header %}
+    {% include 'partials/header.twig' %}
+    {% endblock %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                {% block body %}{% endblock %}
+            </div>
+            <div class="col-md-4">
+                {% block right_sidebar %}
+                {% include "partials/newsletter_form.twig" %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>

@@ -22,6 +22,15 @@ module.exports = function (app) {
         res.locals.getQueryString = queryLib.generateQueryUrl(req.originalUrl);
         res.locals.success_msg = req.flash('success_msg');
         res.locals.error_msg = req.flash('error_msg');
+        res.locals.searchParam = function (key, value) {
+            let pObj = new URLSearchParams(req.query);
+            if (pObj.has(key)) {
+                pObj.set(key, value);
+            } else {
+                pObj.append(key, value)
+            }
+            return pObj.toString();
+        }
         next();
     })
 }

@@ -2,14 +2,21 @@ var express = require('express');
 var router = express.Router();
 const post_model = require('../models/posts_model');
 const newsletter = require('../models/newsletter_model');
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', {
-    title: 'Express',
 
-  });
+const notif = require('../lib/newsletter');
+
+/* GET home page. */
+router.get('/', async function (req, res, next) {
+  let data = {};
+  data.posts = await post_model.getBlogPosts();
+  //return res.send(data);
+  res.render('index', data);
 });
 
+router.get('/test', async (req, res) => {
+  let re = await notif.sendNewsletter();
+  res.send(re);
+})
 
 router.get('/:slug', async (req, res, next) => {
   const {
@@ -54,9 +61,11 @@ router.post('/newsletter/subscribe', async function (req, res) {
   } = body;
   try {
     let resp = await newsletter.subscribeUser(name, email);
-    res.send(resp);
+    req.flash('success_msg', 'Subscribed!');
+    res.redirect('/');
   } catch (error) {
-    res.send(error);
+    req.flash('error_msg', 'Subscribed!');
+    res.redirect('/')
   }
   res.send(body);
 })

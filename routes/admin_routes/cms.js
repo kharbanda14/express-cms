@@ -4,6 +4,8 @@ const check = post_types.map(v => v.type);
 const path = require('path');
 const paginator = require('../../lib/pagination');
 
+const notif = require('../../lib/newsletter');
+
 module.exports = function (router) {
     router.get('/cms/:post_type?/:action?/:id?', async function (req, res) {
         const {
@@ -92,6 +94,10 @@ module.exports = function (router) {
                 }
 
                 let newpost = await Post.create_post(post);
+                if (post_type == 'post') {
+                    console.log('sending mails');
+                    notif.sendNewsletter(newpost);
+                }
                 redirect_url = path.dirname(req.originalUrl) + '/edit/' + newpost._id;
                 req.flash('success_msg', 'Post Created!')
             }

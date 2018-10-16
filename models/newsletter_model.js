@@ -22,10 +22,10 @@ exports.subscribeUser = async function (name, email) {
 
 exports.getUsersList = async (query = {}, limit = 20, skip = 0) => {
     return Newsletter.find(query)
-    .limit(limit)
-    .skip(skip)
-    .lean()
-    .exec()
+        .limit(limit)
+        .skip(skip)
+        .lean()
+        .exec()
 }
 exports.getUser = async (id) => {
     return Newsletter.findById(id).lean().exec();
@@ -41,4 +41,9 @@ exports.getSubsCount = async (query = {}) => {
 
 exports.find = async (keyword) => {
     //return Newsletter.
+}
+exports.getEmailsActive = async () => {
+    return Newsletter.find({
+        'is_subscribed': true
+    }, 'email name').lean().exec();
 }

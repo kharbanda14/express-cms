@@ -22,17 +22,28 @@ module.exports.get_all_posts = function (query = {}, limit = 5, skip = 0) {
     }).lean().exec();
 }
 
-module.exports.getPostById = function (id) {
-    return Post.findById(id).populate({
-        path: 'user_id',
-        ref: 'users',
-        select: 'first_name last_name username'
-    })
-    .populate({
+exports.getBlogPosts = (skip = 0) => {
+    return Post.find({
+        post_type: 'post'
+    }).limit(5).skip(skip).sort({
+        _id: 'asc'
+    }).populate({
         path: 'featured_image',
         ref: 'gallery',
-    })
-    .lean().exec();
+    }).lean().exec();
+}
+
+module.exports.getPostById = function (id) {
+    return Post.findById(id).populate({
+            path: 'user_id',
+            ref: 'users',
+            select: 'first_name last_name username'
+        })
+        .populate({
+            path: 'featured_image',
+            ref: 'gallery',
+        })
+        .lean().exec();
 }
 
 module.exports.getPostBySlug = (slug) => {

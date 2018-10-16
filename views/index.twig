@@ -1,12 +1,22 @@
 {% extends 'layouts/default.twig' %}
 {% block body %}
-    <div class="container">
-        <h1>
-            {{title}}
-        </h1>
-        <p>Welcome to
-            {{title}}
-        </p>
-        {% include 'partials/newsletter_form.twig' %}
+
+<h1>Recent Posts</h1>
+{% include "partials\blog_posts.twig" with {posts: posts} %}
+
+{% endblock %}
+
+{% block right_sidebar %}
+{{ parent() }}
+
+<div class="card mt-2">
+    <div class="card-header">Search</div>
+    <div class="card-body">
+        <form action="" method="post">
+            <div class="form-group">
+                <input type="search" class="form-control" placeholder="Search Here">
+            </div>
+        </form>
     </div>
+</div>
 {% endblock %}

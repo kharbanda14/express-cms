@@ -65,6 +65,7 @@ async function getFrom(req, res) {
             return res.send(error);
             return res.redirect(adminConfig.path + '/forms/');
         }
+        //return res.send(data);
         return res.render('admin/forms/submissions', data);
     }
     data.forms = await form_model.getAll();

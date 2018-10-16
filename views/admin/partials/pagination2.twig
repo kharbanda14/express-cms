@@ -1,7 +1,7 @@
 <ul class="pagination">
-<li class="page-item"><a class="page-link" href="?page=1">Start</a></li>
+<li class="page-item"><a class="page-link" href="?{{ searchParam('page','1') }}">Start</a></li>
     {% for i in 1..pagination.max_pages %}
-<li class="page-item {{ i == pagination.current ? 'active' :'' }}"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+<li class="page-item {{ i == pagination.current ? 'active' :'' }}"><a class="page-link" href="?{{ searchParam('page',i) }}">{{i}}</a></li>
     {% endfor %}
-<li class="page-item"><a class="page-link" href="?page={{pagination.max_pages}}">End</a></li>
+<li class="page-item"><a class="page-link" href="?{{ searchParam('page',pagination.max_pages) }}">End</a></li>
 </ul>

@@ -23,7 +23,6 @@ router.post('/login', async function (req, res, next) {
 });
 
 router.get('/check',function (req,res){
-    console.log(req.session.admin)
     res.send(req.session.admin)
 })
 
@@ -38,7 +37,7 @@ router.get('/login', function (req, res, next) {
     }
     res.render('admin/login', {
         title: 'Express',
-        error_msg:req.flash('error_msg')
+        // error_msg:req.flash('error_msg')
     });
 });
 
