@@ -12,12 +12,7 @@
         </h2>
         <div class="row">
             <div class="col-md-12">
-                <div class="col-md-3 float-right">
-                    <div class="form-group">
-                        <input class="form-control" type="search" name="q" id="search" placeholder="Search Here">
-                    </div>
 
-                </div>
                 <div class="float-right">
                     <div class="form-group">
                         <form method="POST">
@@ -35,46 +30,49 @@
         <div class="alert alert-success">{{ error_msg }}</div>
         {% endif %}
         <div class="table-responsive">
-            <table class="table">
-                <tr>
-                    <th>No.</th>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>E-mail</th>
-                    <th>Created At</th>
-                    <th>Active</th>
-                    <th>Actions</th>
-                </tr>
+            <table class="table" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>E-mail</th>
+                        <th>Created At</th>
+                        <th>Active</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
                 {% if users.length > 0 %}
-                {% for user in users %}
-                <tr>
-                    <td> {{ start_i }} </td>
-                    <td>{{ user._id }}</td>
-                    <td> {{ user.name }} </td>
-                    <td> {{ user.email }} </td>
-                    <td>{{ moment(user.created_at).format('Y-M-D h:m A') }}</td>
-                    <td>
-                        {% if user.is_subscribed %}
-                        <span class="badge badge-success">Active</span>
-                        {% else %}
-                        <span class="badge badge-danger">In-Active</span>
-                        {% endif %}
-                    </td>
-                    <td>
-                        <div class="btn-group">
-                            <a href="{{ admin_baseurl }}/newsletter/compose/{{ user._id }}" class="btn btn-primary">
-                                <i class="fa fa-pencil"></i> Compose
-                            </a>
-                            <form id="deleteSub" action="{{ admin_baseurl }}/newsletter/delete/" method="post">
-                                <input type="hidden" name="id" value="{{ user._id }}">
-                                {{ _csrfInput }}
-                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-                {% set start_i = start_i + 1 %}
-                {% endfor %}
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td> {{loop.index}} </td>
+                        <td>{{ user._id }}</td>
+                        <td> {{ user.name }} </td>
+                        <td> {{ user.email }} </td>
+                        <td>{{ moment(user.created_at).format('Y-M-D h:m A') }}</td>
+                        <td>
+                            {% if user.is_subscribed %}
+                            <span class="badge badge-success">Active</span>
+                            {% else %}
+                            <span class="badge badge-danger">In-Active</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{{ admin_baseurl }}/newsletter/compose/{{ user._id }}" class="btn btn-primary">
+                                    <i class="fa fa-pencil"></i> Compose
+                                </a>
+                                <form id="deleteSub" action="{{ admin_baseurl }}/newsletter/delete/" method="post">
+                                    <input type="hidden" name="id" value="{{ user._id }}">
+                                    {{ _csrfInput }}
+                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
                 {% else %}
                 <div class="alert alert-info">
                     0 Records Found!
@@ -88,14 +86,17 @@
 
 {% block additional_js %}
 <script>
-    $('#deleteSub').on('submit', (e) => {
-        e.preventDefault();
-        const _t = this;
-        if (confirm('Are You Sure ?')) {
-            $('#deleteSub')[0].submit();
-        } else {
-            return false;
-        }
+    $(document).ready(function () {
+        $('#dataTable').DataTable();
+        $('#deleteSub').on('submit', (e) => {
+            e.preventDefault();
+            const _t = this;
+            if (confirm('Are You Sure ?')) {
+                $('#deleteSub')[0].submit();
+            } else {
+                return false;
+            }
+        })
     })
 </script>
 {% endblock %}

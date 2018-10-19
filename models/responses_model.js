@@ -7,10 +7,9 @@ module.exports.recordSubmission = (data) => {
 module.exports.getSubmissions = (query = {}, limit = 5, skip = 0, sort = {
     '_id': 'asc',
 }) => {
-    console.log(sort);
     return formResponse.find(query)
-        .limit(limit)
-        .skip(skip)
+        //.limit(limit)
+        //.skip(skip)
         .sort(sort)
         .lean();
 }

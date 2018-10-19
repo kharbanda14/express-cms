@@ -15,7 +15,7 @@ module.exports.count_posts = function (query) {
 }
 
 module.exports.get_all_posts = function (query = {}, limit = 5, skip = 0) {
-    return Post.find(query).limit(limit).skip(skip).populate({
+    return Post.find(query).populate({
         path: 'user_id',
         ref: 'users',
         select: 'first_name last_name username'

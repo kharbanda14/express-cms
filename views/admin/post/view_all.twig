@@ -2,22 +2,25 @@
 
 {% block body %}
 
-<h1>{{post_type.nice_name }}
-    ({{ post_count }})</h1>
+
 <div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <table class="table">
-                    <tr>
-                        <th>No.</th>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Action</th>
-                    </tr>
+                <h2 class="card-title md-2">{{post_type.nice_name }}
+                    ({{ post_count }})</h2>
+                <table class="table" id="postsTable">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
                     {% for post in posts %}
                     <tr>
-                        <td>{{start_i + 1}}</td>
+                        <td>{{loop.index}}</td>
                         <td>{{post._id }}</td>
                         <td>{{post.title }}</td>
                         <td>
@@ -34,13 +37,17 @@
                             </div>
                         </td>
                     </tr>
-                    {% set start_i = start_i + 1 %}
                     {% endfor %}
-
                 </table>
-                {% include "admin/partials/pagination.twig" with {max_page:max_page, current : page} %}
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+{% block additional_js %}
+<script>
+    $(document).ready(function () {
+        $('#postsTable').DataTable()
+    })
+</script>
 {% endblock %}
