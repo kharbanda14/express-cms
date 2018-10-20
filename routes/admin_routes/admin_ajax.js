@@ -1,3 +1,9 @@
+/**
+ * Handles the ajax requests of the application admin interface.
+ * 
+ * handlers are registered in their specific files
+ *
+ */
 const ajax_handlers = require('./ajax/index');
 
 module.exports = function (router) {

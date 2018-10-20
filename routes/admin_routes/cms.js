@@ -96,7 +96,7 @@ module.exports = function (router) {
                 let newpost = await Post.create_post(post);
                 if (post_type == 'post') {
                     console.log('sending mails');
-                    notif.sendNewsletter(newpost);
+                    //notif.sendNewsletter(newpost);
                 }
                 redirect_url = path.dirname(req.originalUrl) + '/edit/' + newpost._id;
                 req.flash('success_msg', 'Post Created!')

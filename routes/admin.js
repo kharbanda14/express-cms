@@ -43,6 +43,7 @@ require('./admin_routes/gallery')(router);
 require('./admin_routes/customization')(router);
 require('./admin_routes/forms')(router);
 require('./admin_routes/newsletter')(router);
+require('./admin_routes/users')(router);
 
 
 module.exports = router;

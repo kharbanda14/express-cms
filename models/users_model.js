@@ -25,3 +25,7 @@ module.exports.authenticateAdmin = function (username, password) {
     });
 
 }
+
+exports.getUsers = () => {
+    return User.find().lean().exec();
+}

@@ -1,0 +1,57 @@
+{% extends 'admin/index.twig'%}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    {% if success_msg.length > 0 %}
+                        <div class="alert alert-success">
+                            {{success_msg[0]}}
+                        </div>
+                    {% endif %}
+                    {% if error_msg.length > 0 %}
+                        <div class="alert alert-danger">
+                            {{error_msg[0]}}
+                        </div>
+                    {% endif %}
+
+                    <h2 class="card-title md-2">
+                        Create User
+                    </h2>
+                    <form method="post">
+                        <div class="form-group">
+                            <label for="username">Username :
+                            </label>
+                            <input class="form-control" type="text" name="username" id="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email :
+                            </label>
+                            <input class="form-control" type="text" name="email" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="first_name">First Name :
+                            </label>
+                            <input class="form-control" type="text" name="first_name" id="first_name">
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Last Name :
+                            </label>
+                            <input class="form-control" type="text" name="last_name" id="last_name">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password :
+                            </label>
+                            <input class="form-control" type="password" name="password" id="password">
+                        </div>
+                        {{ _csrfInput }}
+                        <input class="btn btn-primary" type="submit" value="Create">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block additional_js %}{% endblock %}

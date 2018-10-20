@@ -1,0 +1,55 @@
+{% extends 'admin/index.twig'%}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    {% include 'partials/res_alerts.twig' %}
+                    <h2 class="card-title md-2">
+                        Users <a href="{{admin_baseurl}}/users/create" class="btn btn-primary" > ADD </a> 
+                    </h2>
+                    <table class="table" id="postsTable">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Name</th>
+                                <th>Username</th>
+                                <th>Role</th>
+                                <th>Created At</th>
+                            </tr>
+                        </thead>
+                        {% for user in users %}
+                            <tr>
+                                <td>
+                                    {{ loop.index }}
+                                </td>
+                                <td>
+                                    {{ user.first_name }}
+                                    {{ user.last_name }}
+                                </td>
+                                <td>
+                                    {{ user.username }}
+                                </td>
+                                <td>
+                                    {{ user.role }}
+                                </td>
+                                <td>
+                                    {{ moment(user.created_at).format('Y-M-D h:m A') }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block additional_js %}
+    <script>
+        $(document).ready(function () {
+            $('#postsTable').DataTable()
+        })
+    </script>
+{% endblock %}

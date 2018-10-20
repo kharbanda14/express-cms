@@ -1,5 +1,5 @@
 module.exports = {
-    '5babb843b7d230236078cad4': {
+    '5bc9a1380ed5471548ca0560': {
         fields: [{
                 name: 'first_name',
                 type: 'text',

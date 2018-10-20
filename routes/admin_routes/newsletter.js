@@ -66,7 +66,7 @@ async function postCompose(req, res) {
         let resp = await mailer.send([email], subject, body);
         req.flash('msg_sent', 'Message Sent!');
     } catch (error) {
-        console.log(error.message);
+        console.log('Error Occured -----',error);
         req.flash('existing', req.body);
         req.flash('msg_error', 'Error Occured! Please Try Again.');
     }

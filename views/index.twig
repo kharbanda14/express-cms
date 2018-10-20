@@ -2,8 +2,8 @@
 {% block body %}
 
 <h1>Recent Posts</h1>
-{% include "partials\blog_posts.twig" with {posts: posts} %}
-
+{% include "partials/blog_posts.twig" with {posts: posts} %}
+{{ debug(nav_menu) }}
 {% endblock %}
 
 {% block right_sidebar %}
